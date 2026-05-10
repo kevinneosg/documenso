@@ -132,8 +132,12 @@ COPY --from=installer --chown=nodejs:nodejs /app/packages/prisma/migrations ./pa
 RUN npx prisma generate --schema ./packages/prisma/schema.prisma
 
 
-# Get the start script from docker/
+# Get the start script from docker/ (strip CRLF + ensure executable —
+# Windows uploads can corrupt line endings and lose the +x bit)
 COPY --chown=nodejs:nodejs ./docker/start.sh /app/apps/remix/start.sh
+USER root
+RUN sed -i 's/\r$//' /app/apps/remix/start.sh && chmod +x /app/apps/remix/start.sh
+USER nodejs
 
 WORKDIR /app/apps/remix
 
