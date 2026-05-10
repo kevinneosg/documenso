@@ -16,8 +16,8 @@ export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
         <Text className="my-4 text-base text-slate-400">
           <Trans>
             This document was sent using{' '}
-            <Link className="text-[#7AC455]" href="https://documen.so/mail-footer">
-              Documenso
+            <Link className="text-[#3DDF9B]" href="https://onemed.com.sg">
+              OneMed Sign
             </Link>
             .
           </Trans>
@@ -39,9 +39,9 @@ export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
 
       {!branding.brandingEnabled && (
         <Text className="my-8 text-slate-400 text-sm">
-          Documenso, Inc.
+          OneMed Pte Ltd
           <br />
-          2261 Market Street, #5211, San Francisco, CA 94114, USA
+          gariel.tan@onemed.com.sg · +65 8513 1677 · Singapore
         </Text>
       )}
     </Section>

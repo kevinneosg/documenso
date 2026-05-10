@@ -233,9 +233,9 @@ export const OrganisationMemberInviteDialog = ({ trigger, ...props }: Organisati
 
   const downloadTemplate = () => {
     const data = [
-      { email: 'admin@documenso.com', role: 'Admin' },
-      { email: 'manager@documenso.com', role: 'Manager' },
-      { email: 'member@documenso.com', role: 'Member' },
+      { email: 'admin@onemed.com.sg', role: 'Admin' },
+      { email: 'manager@onemed.com.sg', role: 'Manager' },
+      { email: 'member@onemed.com.sg', role: 'Member' },
     ];
 
     const csvContent = 'Email address,Role\n' + data.map((row) => `${row.email},${row.role}`).join('\n');

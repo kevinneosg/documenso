@@ -192,7 +192,7 @@ export const SubscriptionClaimForm = ({
                   <span>¹&nbsp;</span>
                   <Trans>Your current license does not include these features.</Trans>{' '}
                   <Link
-                    to="https://docs.documenso.com/users/licenses/enterprise-edition"
+                    to="https://docs.onemed.com.sg/users/licenses/enterprise-edition"
                     target="_blank"
                     className="text-foreground underline hover:opacity-80"
                   >
