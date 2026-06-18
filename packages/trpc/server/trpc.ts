@@ -5,6 +5,7 @@ import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-reques
 import { alphaid } from '@documenso/lib/universal/id';
 import { isAdmin } from '@documenso/lib/utils/is-admin';
 import { initTRPC, TRPCError } from '@trpc/server';
+import * as Sentry from '@sentry/node';
 import type { AnyZodObject } from 'zod';
 
 import { dataTransformer } from '../utils/data-transformer';
@@ -57,6 +58,12 @@ const t = initTRPC
           code: originalError.code,
           httpStatus: originalError.statusCode ?? genericErrorCodeToTrpcErrorCodeMap[originalError.code]?.status ?? 400,
         };
+      }
+
+      // Report unexpected (non-AppError) failures to Sentry; expected 4xx
+      // AppErrors are business logic and would just be noise.
+      if (!(originalError instanceof AppError)) {
+        Sentry.captureException(originalError ?? error);
       }
 
       return {

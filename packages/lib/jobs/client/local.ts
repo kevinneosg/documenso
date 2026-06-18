@@ -3,6 +3,7 @@ import { sha256 } from '@noble/hashes/sha2';
 import { BackgroundJobStatus, Prisma } from '@prisma/client';
 import { CronExpressionParser } from 'cron-parser';
 import type { Context as HonoContext } from 'hono';
+import * as Sentry from '@sentry/node';
 
 import { NEXT_PRIVATE_INTERNAL_WEBAPP_URL } from '../../constants/app';
 import { sign } from '../../server-only/crypto/sign';
@@ -447,6 +448,7 @@ export class LocalJobProvider extends BaseJobProvider {
           });
 
           console.log(`[JOBS:${task.id}] Task failed`, err);
+          Sentry.captureException(err, { tags: { source: 'background-job', jobId } });
 
           throw new BackgroundTaskFailedError('Task failed');
         }

@@ -13,6 +13,15 @@ import handle from 'hono-react-router-adapter/node';
 import { getLoadContext } from './hono/server/load-context.js';
 import server from './hono/server/router.js';
 import * as build from './index.js';
+import * as Sentry from '@sentry/node';
+
+Sentry.init({
+  dsn:
+    process.env.SENTRY_DSN ||
+    'https://cb6d8f5485b8158e000fa084d7e0ff4b@o4511405332758528.ingest.us.sentry.io/4511587276226560',
+  environment: process.env.NODE_ENV,
+  tracesSampleRate: 0.1,
+});
 
 server.use(
   serveStatic({
