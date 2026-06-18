@@ -336,7 +336,7 @@ export const EmbedSignDocumentV1ClientPage = ({
                       variant="default"
                       size="sm"
                       className="md:hidden"
-                      disabled={isThrottled || (!isAssistantMode && hasSignatureField && !signatureValid)}
+                      disabled={isThrottled || isSubmitting || (!isAssistantMode && hasSignatureField && !signatureValid)}
                       loading={isSubmitting}
                       onClick={() => throttledOnCompleteClick()}
                     >
@@ -479,7 +479,7 @@ export const EmbedSignDocumentV1ClientPage = ({
                 ) : (
                   <Button
                     className={allowDocumentRejection ? 'col-start-2' : 'col-span-2'}
-                    disabled={isThrottled}
+                    disabled={isThrottled || isSubmitting}
                     loading={isSubmitting}
                     onClick={() => throttledOnCompleteClick()}
                   >
