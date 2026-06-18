@@ -81,6 +81,9 @@ COPY turbo.json turbo.json
 
 RUN npm install -g "turbo@^1.9.3"
 
+# Normalise line endings and ensure shell scripts are executable (safe for Windows-checked-out sources)
+RUN find apps -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; && find apps -type f -name "*.sh" -exec chmod +x {} \;
+
 RUN turbo run build --filter=@documenso/remix...
 
 ###########################
@@ -129,6 +132,9 @@ RUN npx prisma generate --schema ./packages/prisma/schema.prisma
 
 # Get the start script from docker/
 COPY --chown=nodejs:nodejs ./docker/start.sh /app/apps/remix/start.sh
+
+# Normalise line endings on the start script (safe for Windows-checked-out sources)
+RUN sed -i 's/\r$//' /app/apps/remix/start.sh && chmod +x /app/apps/remix/start.sh
 
 WORKDIR /app/apps/remix
 
