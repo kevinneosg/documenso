@@ -357,7 +357,7 @@ export const DocumentSigningCompleteDialog = ({
                     <Trans>Cancel</Trans>
                   </Button>
 
-                  <Button type="submit" disabled={!isComplete} loading={form.formState.isSubmitting}>
+                  <Button type="submit" disabled={!isComplete || isSubmitting} loading={form.formState.isSubmitting || isSubmitting}>
                     {match(recipient.role)
                       .with(RecipientRole.VIEWER, () => <Trans>Mark as Viewed</Trans>)
                       .with(RecipientRole.SIGNER, () => <Trans>Sign</Trans>)

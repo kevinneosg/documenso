@@ -42,7 +42,7 @@ export const EnvelopeSignerCompleteDialog = () => {
 
   const { onDocumentCompleted, onDocumentError } = useEmbedSigningContext() || {};
 
-  const { mutateAsync: completeDocument, isPending } = trpc.recipient.completeDocumentWithToken.useMutation();
+  const { mutateAsync: completeDocument, isPending, isSuccess } = trpc.recipient.completeDocumentWithToken.useMutation();
 
   const { mutateAsync: createDocumentFromDirectTemplate } =
     trpc.template.createDocumentFromDirectTemplate.useMutation();
@@ -237,7 +237,7 @@ export const EnvelopeSignerCompleteDialog = () => {
 
   return (
     <DocumentSigningCompleteDialog
-      isSubmitting={isPending}
+      isSubmitting={isPending || isSuccess}
       recipientPayload={recipientPayload}
       onSignatureComplete={isDirectTemplate ? handleDirectTemplateCompleteClick : handleOnCompleteClick}
       documentTitle={envelope.title}
